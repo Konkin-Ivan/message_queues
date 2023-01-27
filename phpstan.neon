@@ -1,0 +1,28 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+  level: 9
+  paths:
+    - app
+    - database
+    - resources
+    - routes
+    - tests
+
+  excludePaths:
+      - app/Objects/Files.php
+      - app/Http/Resources/UserResource.php
+      - app/Http/Resources/UsersResource.php
+      - app/Http/Controllers/Auth/*
+      - tests/Feature/Auth/*
+      - app/Http/Requests/Auth/LoginRequest.php
+      - database/migrations/*_create_permission_tables.php
+
+  checkMissingIterableValueType: false
+  checkModelProperties: true
+  checkOctaneCompatibility: true
+  checkGenericClassInNonGenericObjectType: false
+
+
+
