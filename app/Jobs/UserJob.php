@@ -28,20 +28,10 @@ class UserJob implements ShouldQueue
      */
     public function handle()
     {
-        $userDB = User::where('email', $this->user['email'])->first();
-        if (!empty($userDB)) {
-            $this->user['password'] = Hash::make($this->user['password']);
-            $userDB->fill($this->user);
-            $userDB->update();
-
-        } else {
-            $user = new User();
-            $this->user['password'] = Hash::make($this->user['password']);
-            $user->fill($this->user);
-            $user->save();
-            $userDB = $user;
-
-        }
-        return $userDB;
+        $user = new User();
+        $this->user['password'] = Hash::make($this->user['password']);
+        $user->fill($this->user);
+        $user->save();
+        return $user;
     }
 }

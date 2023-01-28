@@ -64,4 +64,16 @@ class UsersTest extends TestCase
         ]);
         $response->assertStatus(201);
     }
+
+    public function testUserStoreNotValidate(): void
+    {
+        $user = User::factory(1)->create()->first();
+        $response = $this->post(route('users.store'), [
+            'name' => 'Name',
+            'email' => $user->email,
+            'password' => '12345678',
+            'password_confirmation' => '12345678'
+        ]);
+        $response->assertStatus(422);
+    }
 }
